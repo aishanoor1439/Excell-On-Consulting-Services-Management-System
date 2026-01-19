@@ -1,132 +1,133 @@
-Excell-On Consulting Services Management System
-📌 Overview
+# 🚀 Excell-On Consulting Services Management System
 
-Excell-On Consulting Services provides inbound, outbound, and tele-marketing services to multiple corporate clients. This project is a web-based management system developed to digitalize their operations including:
+![C#](https://img.shields.io/badge/C%23-.NET-blue)
+![ASP.NET](https://img.shields.io/badge/ASP.NET-Core_MVC-purple)
+![SQL Server](https://img.shields.io/badge/SQL_Server-Database-red)
+![Status](https://img.shields.io/badge/Status-Academic-success)
+![License](https://img.shields.io/badge/License-Academic-lightgrey)
 
-client management
+> **Excell-On Consulting Services Management System** is a web-based system designed to digitalize and automate the operations of a consulting services company, improving efficiency, accuracy, and reporting.
 
-employee and department management
+---
 
-service subscription tracking
+## ✨ Key Highlights
 
-billing and payments
+✔ Centralized client & service management
+✔ Department-wise employee allocation
+✔ Financial and operational reporting
+✔ Clean UI with validation
 
-reporting and monitoring
+---
 
-The application centralizes data and automates calculations, improving accuracy and efficiency.
+## 📌 Overview
 
-🎯 Objectives
+**Excell-On Consulting Services** provides inbound, outbound, and tele‑marketing services to multiple corporate clients.
+This project is a **web‑based management system** developed to digitalize their operations, including:
 
-Maintain details of services, employees, clients, and payments
+* Client management
+* Employee and department management
+* Service subscription tracking
+* Reporting and monitoring
 
-Track which services are subscribed by each client
+The application centralizes data and automates calculations, improving overall **accuracy and efficiency**.
 
-Maintain department-wise employee allocation
+---
 
-Generate financial and operational reports
+## 🎯 Objectives
 
-Provide CRUD features (Add / Edit / Delete / Search)
+* Maintain details of services, employees, clients, and payments
+* Track which services are subscribed by each client
+* Maintain department‑wise employee allocation
+* Generate financial and operational reports
+* Provide CRUD features (Add / Edit / Delete / Search)
+* Support advanced search functionality
 
-Support advanced search functionality
+---
 
-🛠️ Technology Stack
+## 🛠️ Technology Stack
 
-Frontend: HTML, CSS, Bootstrap
+* **Frontend:** HTML, CSS, Bootstrap
+* **Backend:** ASP.NET / ASP.NET Core MVC
+* **Database:** SQL Server with Entity Framework
+* **Language:** C#
+* **Architecture:** MVC layered design
 
-Backend: ASP.NET / ASP.NET Core MVC
+---
 
-Database: SQL Server with Entity Framework
+## 🧩 System Modules
 
-Language: C#
+* Client Management
+* Service Management
+* Employee & Department Management
+* Client–Service Mapping
+* Report Generation
+* Authentication Module
 
-Architecture: MVC layered design
+---
 
-🧩 System Modules
+## 📂 Database Entities (Conceptual)
 
-Client Management
+* Client
+* Service
+* Department
+* Employee
+* ClientService (many‑to‑many mapping)
 
-Service Management
+---
 
-Employee & Department Management
+## 🧠 Key Features
 
-Client–Service Mapping
+* ✔ CRUD operations for all master data
+* ✔ Advanced client & service search
+* ✔ Employee allocation tracking
+* ✔ Report generation
+* ✔ Validation and clean GUI forms
 
-Payment & Billing Management
+---
 
-Report Generation
+## 🗂️ Folder Structure (Typical)
 
-Authentication module
-
-📂 Database Entities (Conceptual)
-
-Client
-
-Service
-
-Department
-
-Employee
-
-ClientService (many-to-many mapping)
-
-🧠 Key Features
-
-✔ CRUD operations for all master data
-✔ Advanced client & service search
-✔ Pending / late payment identification
-✔ Employee allocation tracking
-✔ Report generation
-✔ Validation and clean GUI forms
-
-🗂️ Folder Structure (Typical)
 /Controllers
 /Models
 /Views
 /wwwroot
 /appsettings.json
 
-🚀 How to Run the Project
+---
 
-Restore database / update connection string
+## 🚀 How to Run the Project
 
-Run migrations 
+1. Restore the database / update the connection string
+2. Run migrations
+3. Build and run the project
+4. Open in browser (localhost URL)
 
-Build and run the project
+---
 
-Open in browser (localhost URL)
+## 🧪 Testing Performed
 
-🧪 Testing Performed
+* Unit testing checklist completed
+* CRUD operations verified
+* Report outputs validated
+* User input validations tested
 
-Unit testing checklist completed
+---
 
-CRUD verified
+## 👤 Author
 
-Report outputs validated
+**Aisha Noor**
+Bachelor in Software Engineering – Bahria University Karachi Campus
+Diploma in Software Engineering – Aptech
 
-User input validations tested
+🔗 LinkedIn: https://www.linkedin.com/in/aisha-noor-3520062a6/
 
-📄 Documentation Available
+---
 
-This project includes the following:
+## 📄 License
 
-Problem Definition
+This project is developed for academic purposes.
+© 2026 – All Rights Reserved.
 
-Requirement Specification
+---
 
-Project Plan
-
-Algorithms
-
-GUI Standards
-
-Interface Design Document
-
-Task Sheet
-
-Review & Monitoring Report
-
-Unit Testing Checklist
-
-👤 Author
-
-Developed as an academic assignment for Excell-On Consulting Services Management System.
+> *Feel free to fork, star ⭐, and contribute!*

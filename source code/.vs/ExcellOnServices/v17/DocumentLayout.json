@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\Project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\project\\views\\reports\\serviceusage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:views\\reports\\serviceusage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ServiceUsage.cshtml",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\Project\\Views\\Reports\\ServiceUsage.cshtml",
+              "RelativeDocumentMoniker": "Views\\Reports\\ServiceUsage.cshtml",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\Project\\Views\\Reports\\ServiceUsage.cshtml",
+              "RelativeToolTip": "Views\\Reports\\ServiceUsage.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-06T15:05:11.698Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
