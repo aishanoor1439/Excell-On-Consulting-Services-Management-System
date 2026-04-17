@@ -120,6 +120,8 @@ Bachelor in Software Engineering – Bahria University Karachi Campus
 Diploma in Software Engineering – Aptech
 
 🔗 LinkedIn: https://www.linkedin.com/in/aisha-noor-3520062a6/
+🔗 LinkedIn: https://www.linkedin.com/in/aamnah-attariah-452373385/
+
 
 ---
 
