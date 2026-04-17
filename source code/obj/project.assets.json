@@ -8112,31 +8112,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\aisha_ppxjc2l\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\LENOVO\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\Project\\ExcellOnServices.csproj",
+      "projectUniqueName": "C:\\Users\\LENOVO\\Documents\\GitHub\\Excell-On-Consulting-Services-Management-System\\source code\\ExcellOnServices.csproj",
       "projectName": "ExcellOnServices",
-      "projectPath": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\Project\\ExcellOnServices.csproj",
-      "packagesPath": "C:\\Users\\aisha_ppxjc2l\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\Project\\obj\\",
+      "projectPath": "C:\\Users\\LENOVO\\Documents\\GitHub\\Excell-On-Consulting-Services-Management-System\\source code\\ExcellOnServices.csproj",
+      "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\LENOVO\\Documents\\GitHub\\Excell-On-Consulting-Services-Management-System\\source code\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\aisha_ppxjc2l\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8154,8 +8147,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.300"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -8211,7 +8203,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.420/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
