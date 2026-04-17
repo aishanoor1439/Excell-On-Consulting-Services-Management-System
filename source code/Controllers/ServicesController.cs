@@ -14,33 +14,35 @@ namespace ExcellOnServices.Controllers
     [Authorize]
     public class ServicesController : Controller
     {
+        // Singleton Instance use karne ke liye variable
         private readonly ApplicationDbContext _context;
 
-        public ServicesController(ApplicationDbContext context)
+        // Hum yahan Singleton Pattern use kar rahe hain (Lab Manual Requirement)
+        public ServicesController()
         {
-            _context = context;
+            // DatabaseHandler se single instance fetch kar rahe hain
+            // Note: Options ko null rakha hai kyunke Handler internal connection string handle kar raha hai
+            _context = DatabaseHandler.GetContext(null); 
         }
 
         // GET: Services
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Services.ToListAsync());
+            // Singleton context ke zariye data fetch ho raha hai
+            var services = await _context.Services.ToListAsync();
+            return View(services);
         }
 
         // GET: Services/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
+            // Singleton context call
             var service = await _context.Services
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (service == null)
-            {
-                return NotFound();
-            }
+                
+            if (service == null) return NotFound();
 
             return View(service);
         }
@@ -52,14 +54,13 @@ namespace ExcellOnServices.Controllers
         }
 
         // POST: Services/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,DailyChargePerEmployee,CreatedDate,IsActive")] Service service)
         {
             if (ModelState.IsValid)
             {
+                // Singleton instance ke zariye save ho raha hai
                 _context.Add(service);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -70,30 +71,20 @@ namespace ExcellOnServices.Controllers
         // GET: Services/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var service = await _context.Services.FindAsync(id);
-            if (service == null)
-            {
-                return NotFound();
-            }
+            if (service == null) return NotFound();
+            
             return View(service);
         }
 
         // POST: Services/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,DailyChargePerEmployee,CreatedDate,IsActive")] Service service)
         {
-            if (id != service.Id)
-            {
-                return NotFound();
-            }
+            if (id != service.Id) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -104,14 +95,8 @@ namespace ExcellOnServices.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ServiceExists(service.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    if (!ServiceExists(service.Id)) return NotFound();
+                    else throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -121,17 +106,12 @@ namespace ExcellOnServices.Controllers
         // GET: Services/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var service = await _context.Services
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (service == null)
-            {
-                return NotFound();
-            }
+                
+            if (service == null) return NotFound();
 
             return View(service);
         }
@@ -156,4 +136,4 @@ namespace ExcellOnServices.Controllers
             return _context.Services.Any(e => e.Id == id);
         }
     }
-}
+}   
