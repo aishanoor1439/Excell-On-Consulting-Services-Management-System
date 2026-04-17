@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ExcellOnServices")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c476ec9dcf1e2bf1be7249adcd3506bc4e340b87")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+01d18c557c0c044b8050e7145469e7117b5f8430")]
 [assembly: System.Reflection.AssemblyProductAttribute("ExcellOnServices")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ExcellOnServices")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
