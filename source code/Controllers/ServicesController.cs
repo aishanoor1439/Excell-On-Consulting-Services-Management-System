@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ExcellOnServices.Data;
 using ExcellOnServices.Models;
@@ -14,76 +12,80 @@ namespace ExcellOnServices.Controllers
     [Authorize]
     public class ServicesController : Controller
     {
-        // Singleton Instance use karne ke liye variable
-        private readonly ApplicationDbContext _context;
+        // Yahan 'readonly' hata diya hai taake disposed hone par refresh kiya ja sakay
+        private ApplicationDbContext _context;
 
-        // Hum yahan Singleton Pattern use kar rahe hain (Lab Manual Requirement)
         public ServicesController()
         {
-            // DatabaseHandler se single instance fetch kar rahe hain
-            // Note: Options ko null rakha hai kyunke Handler internal connection string handle kar raha hai
-            _context = DatabaseHandler.GetContext(null); 
+            // Initial instance fetch
+            _context = DatabaseHandler.GetContext(null);
+        }
+
+        // Helper method: Jo har action se pehle check karega ke context 'alive' hai ya nahi
+        private void RefreshContext()
+        {
+            _context = DatabaseHandler.GetContext(null);
         }
 
         // GET: Services
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            // Singleton context ke zariye data fetch ho raha hai
-            var services = await _context.Services.ToListAsync();
+            RefreshContext(); // Aakhri touch: Connection check
+            if (_context == null) return NotFound("Database connection error.");
+            
+            var services = _context.Services.AsNoTracking().ToList();
             return View(services);
         }
 
         // GET: Services/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
+            RefreshContext();
             if (id == null) return NotFound();
 
-            // Singleton context call
-            var service = await _context.Services
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var service = _context.Services
+                .AsNoTracking()
+                .FirstOrDefault(m => m.Id == id);
                 
             if (service == null) return NotFound();
 
             return View(service);
         }
 
-        // GET: Services/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        public IActionResult Create() => View();
 
-        // POST: Services/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,DailyChargePerEmployee,CreatedDate,IsActive")] Service service)
+        public IActionResult Create([Bind("Id,Name,Description,DailyChargePerEmployee,CreatedDate,IsActive")] Service service)
         {
+            RefreshContext();
             if (ModelState.IsValid)
             {
-                // Singleton instance ke zariye save ho raha hai
+                if (service.CreatedDate == default) service.CreatedDate = DateTime.Now;
+
                 _context.Add(service);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(service);
         }
 
-        // GET: Services/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
+            RefreshContext();
             if (id == null) return NotFound();
 
-            var service = await _context.Services.FindAsync(id);
+            var service = _context.Services.Find(id);
             if (service == null) return NotFound();
             
             return View(service);
         }
 
-        // POST: Services/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,DailyChargePerEmployee,CreatedDate,IsActive")] Service service)
+        public IActionResult Edit(int id, [Bind("Id,Name,Description,DailyChargePerEmployee,CreatedDate,IsActive")] Service service)
         {
+            RefreshContext();
             if (id != service.Id) return NotFound();
 
             if (ModelState.IsValid)
@@ -91,7 +93,7 @@ namespace ExcellOnServices.Controllers
                 try
                 {
                     _context.Update(service);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -103,37 +105,38 @@ namespace ExcellOnServices.Controllers
             return View(service);
         }
 
-        // GET: Services/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
+            RefreshContext();
             if (id == null) return NotFound();
 
-            var service = await _context.Services
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var service = _context.Services
+                .AsNoTracking()
+                .FirstOrDefault(m => m.Id == id);
                 
             if (service == null) return NotFound();
 
             return View(service);
         }
 
-        // POST: Services/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var service = await _context.Services.FindAsync(id);
+            RefreshContext();
+            var service = _context.Services.Find(id);
             if (service != null)
             {
                 _context.Services.Remove(service);
+                _context.SaveChanges();
             }
-
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ServiceExists(int id)
         {
+            RefreshContext();
             return _context.Services.Any(e => e.Id == id);
         }
     }
-}   
+}

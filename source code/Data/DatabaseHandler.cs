@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace ExcellOnServices.Data
 {
@@ -13,22 +14,34 @@ namespace ExcellOnServices.Data
         {
             lock (_lock)
             {
-                if (_instance == null)
+                // Check karein ke kya instance null hai ya Dispose ho chuka hai
+                if (_instance == null || IsContextDisposed(_instance))
                 {
-                    // Agar options null hain, toh default options create karein
-                    if (options == null)
-                    {
-                        var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-                        // Aapki connection string yahan aayegi (Check appsettings.json)
-                  optionsBuilder.UseSqlServer(@"Server=.\LAB;Database=ExcellOnDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true");
-                        _instance = new ApplicationDbContext(optionsBuilder.Options);   
-                    }
-                    else
-                    {
-                        _instance = new ApplicationDbContext(options);
-                    }
+                    var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+                    optionsBuilder.UseSqlServer(@"Server=.\LAB;Database=ExcellOnDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true");
+                    
+                    _instance = new ApplicationDbContext(optionsBuilder.Options);
                 }
                 return _instance;
+            }
+        }
+
+        // Helper function to check if context is disposed
+        private static bool IsContextDisposed(ApplicationDbContext context)
+        {
+            try
+            {
+                // Agar context disposed hai, toh ye property access karne par exception dega
+                var test = context.Model; 
+                return false;
+            }
+            catch (ObjectDisposedException)
+            {
+                return true;
+            }
+            catch (Exception)
+            {
+                return true;
             }
         }
     }
