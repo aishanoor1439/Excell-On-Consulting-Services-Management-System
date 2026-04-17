@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LENOVO\\Documents\\GitHub\\Excell-On-Consulting-Services-Management-System\\source code\\ExcellOnServices.csproj": {}
+    "c:\\Users\\LENOVO\\Documents\\GitHub\\Excell-On-Consulting-Services-Management-System\\source code\\ExcellOnServices.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LENOVO\\Documents\\GitHub\\Excell-On-Consulting-Services-Management-System\\source code\\ExcellOnServices.csproj": {
+    "c:\\Users\\LENOVO\\Documents\\GitHub\\Excell-On-Consulting-Services-Management-System\\source code\\ExcellOnServices.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LENOVO\\Documents\\GitHub\\Excell-On-Consulting-Services-Management-System\\source code\\ExcellOnServices.csproj",
+        "projectUniqueName": "c:\\Users\\LENOVO\\Documents\\GitHub\\Excell-On-Consulting-Services-Management-System\\source code\\ExcellOnServices.csproj",
         "projectName": "ExcellOnServices",
-        "projectPath": "C:\\Users\\LENOVO\\Documents\\GitHub\\Excell-On-Consulting-Services-Management-System\\source code\\ExcellOnServices.csproj",
+        "projectPath": "c:\\Users\\LENOVO\\Documents\\GitHub\\Excell-On-Consulting-Services-Management-System\\source code\\ExcellOnServices.csproj",
         "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LENOVO\\Documents\\GitHub\\Excell-On-Consulting-Services-Management-System\\source code\\obj\\",
+        "outputPath": "c:\\Users\\LENOVO\\Documents\\GitHub\\Excell-On-Consulting-Services-Management-System\\source code\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config"

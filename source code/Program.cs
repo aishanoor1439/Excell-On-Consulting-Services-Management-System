@@ -4,27 +4,31 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+// === 1. CONNECTION STRING UPDATION ===
+// Yahan hum wahi connection string use karenge jo DatabaseHandler mein hai
+var connectionString = @"Server=.\LAB;Database=ExcellOnDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true";
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+// === 2. IDENTITY CONFIGURATION (RoleManager Fix) ===
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
-    options.SignIn.RequireConfirmedAccount = false; // Changed to false
+    options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
     options.Password.RequireUppercase = true;
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequiredLength = 6;
 })
+.AddRoles<IdentityRole>() // Ye line add ki hai RoleManager ka error khatam karne ke liye
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
-// Configure cookie settings for login
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Identity/Account/Login";
@@ -36,7 +40,6 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
@@ -49,40 +52,37 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
-// === ROUTING CONFIGURATION ===
-// Map default route to Landing (public page)
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Landing}/{id?}");
 
-// Map Razor Pages (for Identity - login/register)
 app.MapRazorPages();
 
-// Optional: Explicit dashboard route
 app.MapControllerRoute(
     name: "dashboard",
     pattern: "dashboard",
     defaults: new { controller = "Home", action = "Index" });
 
-// Seed initial data
+// === 3. SEED DATA & SINGLETON TEST ===
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+    
+    // Yahan DbInitializer chalega aur Singleton ka pehla instance banayega
     DbInitializer.Initialize(services);
 
-    // Create default admin user (optional)
     await CreateDefaultUser(services);
 }
 
+// Singleton verification line
+var testInstance = ExcellOnServices.Data.DatabaseHandler.GetContext(null);
+
 app.Run();
 
-// Helper method to create default admin user
 async Task CreateDefaultUser(IServiceProvider serviceProvider)
 {
     try
@@ -90,13 +90,11 @@ async Task CreateDefaultUser(IServiceProvider serviceProvider)
         var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
         var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-        // Create Admin role if it doesn't exist
         if (!await roleManager.RoleExistsAsync("Admin"))
         {
             await roleManager.CreateAsync(new IdentityRole("Admin"));
         }
 
-        // Create default admin user if it doesn't exist
         var adminUser = await userManager.FindByEmailAsync("admin@excellon.com");
         if (adminUser == null)
         {
@@ -116,7 +114,6 @@ async Task CreateDefaultUser(IServiceProvider serviceProvider)
     }
     catch (Exception ex)
     {
-        // Log error if needed
         Console.WriteLine($"Error creating default user: {ex.Message}");
     }
 }

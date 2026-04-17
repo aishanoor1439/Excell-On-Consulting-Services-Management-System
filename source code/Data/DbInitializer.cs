@@ -11,25 +11,25 @@ namespace ExcellOnServices.Data
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new ApplicationDbContext(
-                serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
+            // Singleton DatabaseHandler ka istemal
+            using (var context = ExcellOnServices.Data.DatabaseHandler.GetContext(null))
             {
-                // Look for any services
+                // 1. Look for any services (Check if DB is already seeded)
                 if (context.Services.Any())
                 {
-                    return; // DB has been seeded
+                    return; // DB has already been seeded, so exit
                 }
 
-                // Add Services
+                // 2. Add Services
                 var services = new Service[]
                 {
-                    new Service { Name = "In-bound", Description = "Receive calls from customers", DailyChargePerEmployee = 4500, IsActive = true },
-                    new Service { Name = "Out-bound", Description = "Call customers for promotions", DailyChargePerEmployee = 6000, IsActive = true },
-                    new Service { Name = "Tele Marketing", Description = "Sales and marketing calls", DailyChargePerEmployee = 5500, IsActive = true }
+                    new Service { Name = "In-bound", Description = "Receive calls from customers", DailyChargePerEmployee = 4500, IsActive = true, CreatedDate = DateTime.Now },
+                    new Service { Name = "Out-bound", Description = "Call customers for promotions", DailyChargePerEmployee = 6000, IsActive = true, CreatedDate = DateTime.Now },
+                    new Service { Name = "Tele Marketing", Description = "Sales and marketing calls", DailyChargePerEmployee = 5500, IsActive = true, CreatedDate = DateTime.Now }
                 };
                 context.Services.AddRange(services);
 
-                // Add Departments
+                // 3. Add Departments
                 var departments = new Department[]
                 {
                     new Department { Name = "HR Management", Description = "Human Resources Department" },
@@ -41,8 +41,9 @@ namespace ExcellOnServices.Data
                 };
                 context.Departments.AddRange(departments);
 
+                // 4. Final Save
                 context.SaveChanges();
-            }
+            } // Context yahan band ho raha hai
         }
     }
 }

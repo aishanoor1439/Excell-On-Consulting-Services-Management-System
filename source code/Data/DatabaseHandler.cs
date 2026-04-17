@@ -20,8 +20,8 @@ namespace ExcellOnServices.Data
                     {
                         var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
                         // Aapki connection string yahan aayegi (Check appsettings.json)
-                        optionsBuilder.UseSqlServer("Server=ELITEX840\\MSSQLSERVER01;Database=ExcellOnDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true");
-                        _instance = new ApplicationDbContext(optionsBuilder.Options);
+                  optionsBuilder.UseSqlServer(@"Server=.\LAB;Database=ExcellOnDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true");
+                        _instance = new ApplicationDbContext(optionsBuilder.Options);   
                     }
                     else
                     {
