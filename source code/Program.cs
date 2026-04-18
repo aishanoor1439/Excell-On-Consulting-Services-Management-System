@@ -4,9 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Initialize DatabaseHandler with configuration
+DatabaseHandler.Initialize(builder.Configuration);
+
 // === 1. CONNECTION STRING UPDATION ===
-// Yahan hum wahi connection string use karenge jo DatabaseHandler mein hai
-var connectionString = @"Server=.\LAB;Database=ExcellOnDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true";
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
@@ -23,7 +25,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequiredLength = 6;
 })
-.AddRoles<IdentityRole>() // Ye line add ki hai RoleManager ka error khatam karne ke liye
+.AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews();
@@ -67,19 +69,15 @@ app.MapControllerRoute(
     pattern: "dashboard",
     defaults: new { controller = "Home", action = "Index" });
 
-// === 3. SEED DATA & SINGLETON TEST ===
+// === 3. SEED DATA ===
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    
-    // Yahan DbInitializer chalega aur Singleton ka pehla instance banayega
+
     DbInitializer.Initialize(services);
 
     await CreateDefaultUser(services);
 }
-
-// Singleton verification line
-var testInstance = ExcellOnServices.Data.DatabaseHandler.GetContext(null);
 
 app.Run();
 

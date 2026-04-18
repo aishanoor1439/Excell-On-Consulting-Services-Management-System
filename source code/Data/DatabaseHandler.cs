@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 
 namespace ExcellOnServices.Data
@@ -7,42 +8,54 @@ namespace ExcellOnServices.Data
     {
         private static ApplicationDbContext _instance;
         private static readonly object _lock = new object();
+        private static IConfiguration _configuration;
+        private static bool _isDisposed = false;
 
         private DatabaseHandler() { }
 
-        public static ApplicationDbContext GetContext(DbContextOptions<ApplicationDbContext> options)
+        public static void Initialize(IConfiguration configuration)
         {
+            _configuration = configuration;
+        }
+
+        public static ApplicationDbContext GetContext()
+        {
+            if (_configuration == null)
+                throw new InvalidOperationException("DatabaseHandler not initialized. Call Initialize() first.");
+
             lock (_lock)
             {
-                // Check karein ke kya instance null hai ya Dispose ho chuka hai
-                if (_instance == null || IsContextDisposed(_instance))
+                // If instance is disposed or null, create new one
+                if (_instance == null || _isDisposed)
                 {
+                    var connectionString = _configuration.GetConnectionString("DefaultConnection");
                     var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-                    optionsBuilder.UseSqlServer(@"Server=.\LAB;Database=ExcellOnDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true");
-                    
+                    optionsBuilder.UseSqlServer(connectionString);
+
                     _instance = new ApplicationDbContext(optionsBuilder.Options);
+                    _isDisposed = false;
                 }
                 return _instance;
             }
         }
 
-        // Helper function to check if context is disposed
-        private static bool IsContextDisposed(ApplicationDbContext context)
+        public static void Reset()
         {
-            try
+            lock (_lock)
             {
-                // Agar context disposed hai, toh ye property access karne par exception dega
-                var test = context.Model; 
-                return false;
+                if (_instance != null && !_isDisposed)
+                {
+                    _instance.Dispose();
+                    _isDisposed = true;
+                }
+                _instance = null;
             }
-            catch (ObjectDisposedException)
-            {
-                return true;
-            }
-            catch (Exception)
-            {
-                return true;
-            }
+        }
+
+        // Call this if you accidentally disposed the context
+        public static void MarkAsDisposed()
+        {
+            _isDisposed = true;
         }
     }
 }

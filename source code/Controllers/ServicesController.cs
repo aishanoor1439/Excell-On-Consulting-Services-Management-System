@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ExcellOnServices.Data;
@@ -12,130 +13,175 @@ namespace ExcellOnServices.Controllers
     [Authorize]
     public class ServicesController : Controller
     {
-        // Yahan 'readonly' hata diya hai taake disposed hone par refresh kiya ja sakay
         private ApplicationDbContext _context;
 
         public ServicesController()
         {
-            // Initial instance fetch
-            _context = DatabaseHandler.GetContext(null);
+            _context = DatabaseHandler.GetContext();
         }
 
-        // Helper method: Jo har action se pehle check karega ke context 'alive' hai ya nahi
-        private void RefreshContext()
+        // Safety method to ensure context is valid
+        private void EnsureContext()
         {
-            _context = DatabaseHandler.GetContext(null);
+            try
+            {
+                // Check if context is disposed by trying to access a property
+                var test = _context.Model;
+            }
+            catch (ObjectDisposedException)
+            {
+                // If disposed, get a fresh instance
+                _context = DatabaseHandler.GetContext();
+            }
         }
 
         // GET: Services
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            RefreshContext(); // Aakhri touch: Connection check
-            if (_context == null) return NotFound("Database connection error.");
-            
-            var services = _context.Services.AsNoTracking().ToList();
+            EnsureContext(); // Safety check
+            var services = await _context.Services.ToListAsync();
             return View(services);
         }
 
         // GET: Services/Details/5
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
-            RefreshContext();
-            if (id == null) return NotFound();
+            EnsureContext(); // Safety check
 
-            var service = _context.Services
-                .AsNoTracking()
-                .FirstOrDefault(m => m.Id == id);
-                
-            if (service == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var service = await _context.Services
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (service == null)
+            {
+                return NotFound();
+            }
 
             return View(service);
         }
 
-        public IActionResult Create() => View();
+        // GET: Services/Create
+        public IActionResult Create()
+        {
+            EnsureContext(); // Safety check
+            return View();
+        }
 
+        // POST: Services/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Name,Description,DailyChargePerEmployee,CreatedDate,IsActive")] Service service)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,DailyChargePerEmployee,CreatedDate,IsActive")] Service service)
         {
-            RefreshContext();
+            EnsureContext(); // Safety check
+
             if (ModelState.IsValid)
             {
-                if (service.CreatedDate == default) service.CreatedDate = DateTime.Now;
+                if (service.CreatedDate == default)
+                    service.CreatedDate = DateTime.Now;
 
                 _context.Add(service);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(service);
         }
 
-        public IActionResult Edit(int? id)
+        // GET: Services/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
-            RefreshContext();
-            if (id == null) return NotFound();
+            EnsureContext(); // Safety check
 
-            var service = _context.Services.Find(id);
-            if (service == null) return NotFound();
-            
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var service = await _context.Services.FindAsync(id);
+            if (service == null)
+            {
+                return NotFound();
+            }
             return View(service);
         }
 
+        // POST: Services/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Id,Name,Description,DailyChargePerEmployee,CreatedDate,IsActive")] Service service)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,DailyChargePerEmployee,CreatedDate,IsActive")] Service service)
         {
-            RefreshContext();
-            if (id != service.Id) return NotFound();
+            EnsureContext(); // Safety check
+
+            if (id != service.Id)
+            {
+                return NotFound();
+            }
 
             if (ModelState.IsValid)
             {
                 try
                 {
                     _context.Update(service);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ServiceExists(service.Id)) return NotFound();
-                    else throw;
+                    if (!ServiceExists(service.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
                 return RedirectToAction(nameof(Index));
             }
             return View(service);
         }
 
-        public IActionResult Delete(int? id)
+        // GET: Services/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            RefreshContext();
-            if (id == null) return NotFound();
+            EnsureContext(); // Safety check
 
-            var service = _context.Services
-                .AsNoTracking()
-                .FirstOrDefault(m => m.Id == id);
-                
-            if (service == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var service = await _context.Services
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (service == null)
+            {
+                return NotFound();
+            }
 
             return View(service);
         }
 
+        // POST: Services/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            RefreshContext();
-            var service = _context.Services.Find(id);
+            EnsureContext(); // Safety check
+
+            var service = await _context.Services.FindAsync(id);
             if (service != null)
             {
                 _context.Services.Remove(service);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
+
             return RedirectToAction(nameof(Index));
         }
 
         private bool ServiceExists(int id)
         {
-            RefreshContext();
+            EnsureContext(); // Safety check
             return _context.Services.Any(e => e.Id == id);
         }
     }
