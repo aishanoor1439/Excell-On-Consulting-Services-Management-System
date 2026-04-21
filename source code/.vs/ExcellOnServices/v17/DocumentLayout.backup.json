@@ -3,32 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\controllers\\servicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:controllers\\servicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\data\\databasehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:data\\databasehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\views\\reports\\serviceusage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:views\\reports\\serviceusage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,101 +14,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ServicesController.cs",
-              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\ServicesController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ServicesController.cs",
-              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\ServicesController.cs*",
-              "RelativeToolTip": "Controllers\\ServicesController.cs*",
-              "ViewState": "AgIAAHAAAAAAAAAAAAAkwLsAAAABAAAAAAAAAA==",
+              "Title": "ReportsController.cs",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\ReportsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ReportsController.cs",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\ReportsController.cs",
+              "RelativeToolTip": "Controllers\\ReportsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-18T03:14:47.458Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-04-17T16:42:16.326Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAGIAAAAAAAAAAAAUwHQAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-17T16:59:07.223Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DatabaseHandler.cs",
-              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Data\\DatabaseHandler.cs",
-              "RelativeDocumentMoniker": "Data\\DatabaseHandler.cs",
-              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Data\\DatabaseHandler.cs*",
-              "RelativeToolTip": "Data\\DatabaseHandler.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-17T16:37:13.935Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DbInitializer.cs",
-              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Data\\DbInitializer.cs",
-              "RelativeDocumentMoniker": "Data\\DbInitializer.cs",
-              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Data\\DbInitializer.cs*",
-              "RelativeToolTip": "Data\\DbInitializer.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-17T16:33:33.391Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ServiceUsage.cshtml",
-              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Views\\Reports\\ServiceUsage.cshtml",
-              "RelativeDocumentMoniker": "Views\\Reports\\ServiceUsage.cshtml",
-              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Views\\Reports\\ServiceUsage.cshtml",
-              "RelativeToolTip": "Views\\Reports\\ServiceUsage.cshtml",
-              "ViewState": "AgIAADAAAAAAAAAAAAAAAAwAAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-06T15:05:11.698Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-17T16:52:50.916Z",
+              "WhenOpened": "2026-04-21T07:45:38.227Z",
               "EditorCaption": ""
             }
           ]
