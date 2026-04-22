@@ -19,10 +19,10 @@
                             </button>
                         </div>
                     </div>
-                    <form asp-action="Create">
+                    <form asp-action="CreateWithDecorator">
                         <div class="card-body" style="background-color:#271940;">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            
+
                             <div class="form-group">
                                 <label asp-for="ClientId" class="control-label text-light"></label>
                                 <select asp-for="ClientId" class="form-control bg-dark text-light border-dark" asp-items="ViewBag.ClientId" required>
@@ -30,26 +30,90 @@
                                 </select>
                                 <span asp-validation-for="ClientId" class="text-danger"></span>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label asp-for="Amount" class="control-label text-light"></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-dark text-light border-dark">$</span>
                                     </div>
-                                    <input asp-for="Amount" class="form-control bg-dark text-light border-dark" placeholder="0.00" required />
+                                    <input asp-for="Amount"
+                                           type="number"
+                                           step="any"
+                                           class="form-control bg-dark text-light border-dark"
+                                           placeholder="0.00"
+                                           required
+                                           min="0"
+                                           value="0.00" />
                                 </div>
                                 <span asp-validation-for="Amount" class="text-danger"></span>
                                 <small class="form-text text-muted">Enter payment amount</small>
                             </div>
-                            
+                            <!-- ========== DECORATOR PATTERN SECTION - ADD HERE ========== -->
+                            <div class="card mt-3" style="background-color: #1e1230; border: 1px solid #ff6b35;">
+                                <div class="card-header" style="background-color: #ff6b35;">
+                                    <h4 class="card-title mb-0 text-white">
+                                        <i class="fas fa-paint-brush mr-2"></i>Additional Charges (Decorator Pattern)
+                                    </h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="applyLateFee" />
+                                                    <label class="custom-control-label text-light" for="applyLateFee">
+                                                        Apply Late Fee
+                                                    </label>
+                                                </div>
+                                                <div class="input-group mt-2">
+                                                    <input type="number" id="lateFeePercent" class="form-control bg-dark text-light border-dark" placeholder="Percentage" value="10" step="0.1" disabled />
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text bg-dark text-light border-dark">%</span>
+                                                    </div>
+                                                </div>
+                                                <small class="form-text text-muted">Additional percentage on late payment</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="applyProcessingFee" />
+                                                    <label class="custom-control-label text-light" for="applyProcessingFee">
+                                                        Apply Processing Fee
+                                                    </label>
+                                                </div>
+                                                <div class="input-group mt-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text bg-dark text-light border-dark">$</span>
+                                                    </div>
+                                                    <input type="number" id="processingFee" class="form-control bg-dark text-light border-dark" placeholder="Amount" value="25" step="0.01" disabled />
+                                                </div>
+                                                <small class="form-text text-muted">Fixed processing fee per transaction</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr style="background-color: #ff6b35;" />
+
+                                    <div class="form-group text-center">
+                                        <label class="control-label" style="font-size: 20px; color: #ff6b35; font-weight: bold;">
+                                            💰 FINAL AMOUNT AFTER DECORATORS:
+                                        </label>
+                                        <h2 id="finalAmountDisplay" style="color: #00ff00; font-weight: bold; font-size: 32px;">$0.00</h2>
+                                        <input type="hidden" id="finalAmountHidden" name="DecoratedAmount" />
+                                        <small class="form-text text-muted">Original amount + all selected charges</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ========== DECORATOR PATTERN SECTION END ========== -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label asp-for="PaymentDate" class="control-label text-light"></label>
-                                        <input asp-for="PaymentDate" 
-                                               class="form-control bg-dark text-light border-dark" 
-                                               type="date" 
+                                        <input asp-for="PaymentDate"
+                                               class="form-control bg-dark text-light border-dark"
+                                               type="date"
                                                value="@DateTime.Now.ToString("yyyy-MM-dd")"
                                                required />
                                         <span asp-validation-for="PaymentDate" class="text-danger"></span>
@@ -72,7 +136,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label asp-for="Notes" class="control-label text-light"></label>
                                 <textarea asp-for="Notes" class="form-control bg-dark text-light border-dark" rows="3" placeholder="Enter payment notes (optional)"></textarea>
@@ -81,6 +145,13 @@
                             </div>
                         </div>
                         <div class="card-footer">
+                            <!-- Hidden fields for decorator pattern -->
+                            <input type="hidden" name="ApplyLateFee" id="hdnApplyLateFee" value="false" />
+                            <input type="hidden" name="LateFeePercent" id="hdnLateFeePercent" value="0" />
+                            <input type="hidden" name="ApplyProcessingFee" id="hdnApplyProcessingFee" value="false" />
+                            <input type="hidden" name="ProcessingFee" id="hdnProcessingFee" value="0" />
+
+
                             <button type="submit" class="btn btn-primary">
                                 Record Payment
                             </button>
@@ -132,65 +203,146 @@
 </section>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
     <script>
         // Set default date for PaymentDate
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             console.log('Payment Create page loaded');
-            
+
             const paymentDateInput = document.querySelector('input[name="PaymentDate"]');
             if (paymentDateInput && !paymentDateInput.value) {
                 paymentDateInput.value = new Date().toISOString().split('T')[0];
                 console.log('Set default PaymentDate:', paymentDateInput.value);
             }
-            
+
             // Format amount input
             const amountInput = document.querySelector('input[name="Amount"]');
             if (amountInput) {
-                amountInput.addEventListener('blur', function() {
+                amountInput.addEventListener('blur', function () {
                     if (this.value && !isNaN(this.value)) {
                         this.value = parseFloat(this.value).toFixed(2);
                         console.log('Formatted amount:', this.value);
                     }
                 });
             }
-            
+
             // Debug form submission
             const form = document.querySelector('form');
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', function (e) {
                 console.log('Form submission starting...');
                 console.log('ClientId:', document.querySelector('[name="ClientId"]').value);
                 console.log('Amount:', document.querySelector('[name="Amount"]').value);
                 console.log('PaymentDate:', document.querySelector('[name="PaymentDate"]').value);
                 console.log('PaymentMethod:', document.querySelector('[name="PaymentMethod"]').value);
                 console.log('Notes:', document.querySelector('[name="Notes"]').value);
-                
+
                 // Validate required fields
                 const clientId = document.querySelector('[name="ClientId"]').value;
                 const amount = document.querySelector('[name="Amount"]').value;
                 const paymentMethod = document.querySelector('[name="PaymentMethod"]').value;
-                
+
                 if (!clientId || clientId === '') {
                     e.preventDefault();
                     alert('Please select a client');
                     return;
                 }
-                
+
                 if (!amount || amount === '' || parseFloat(amount) <= 0) {
                     e.preventDefault();
                     alert('Please enter a valid amount greater than 0');
                     return;
                 }
-                
+
                 if (!paymentMethod || paymentMethod === '') {
                     e.preventDefault();
                     alert('Please select a payment method');
                     return;
                 }
-                
+
                 console.log('Form validation passed, submitting...');
             });
+        });
+        // ========== DECORATOR PATTERN CALCULATION ==========
+        function calculateFinalAmount() {
+            // Get original amount
+            let amountInput = document.querySelector('input[name="Amount"]');
+            let originalAmount = parseFloat(amountInput?.value) || 0;
+            let finalAmount = originalAmount;
+
+            // Get checkbox states
+            let applyLateFee = document.getElementById('applyLateFee')?.checked || false;
+            let applyProcessingFee = document.getElementById('applyProcessingFee')?.checked || false;
+
+            // Get fee values
+            let lateFeePercent = parseFloat(document.getElementById('lateFeePercent')?.value) || 0;
+            let processingFee = parseFloat(document.getElementById('processingFee')?.value) || 0;
+
+            // Apply late fee decorator
+            if (applyLateFee && lateFeePercent > 0) {
+                let lateFeeAmount = originalAmount * (lateFeePercent / 100);
+                finalAmount += lateFeeAmount;
+                console.log(`Late Fee (${lateFeePercent}%): $${lateFeeAmount}`);
+            }
+
+            // Apply processing fee decorator
+            if (applyProcessingFee && processingFee > 0) {
+                finalAmount += processingFee;
+                console.log(`Processing Fee: $${processingFee}`);
+            }
+
+            // Update display
+            document.getElementById('finalAmountDisplay').innerText = '$' + finalAmount.toFixed(2);
+            document.getElementById('finalAmountHidden').value = finalAmount;
+
+            // Update hidden fields for form submission
+            document.getElementById('hdnApplyLateFee').value = applyLateFee ? 'true' : 'false';
+            document.getElementById('hdnLateFeePercent').value = lateFeePercent;
+            document.getElementById('hdnApplyProcessingFee').value = applyProcessingFee ? 'true' : 'false';
+            document.getElementById('hdnProcessingFee').value = processingFee;
+
+            console.log(`Original: $${originalAmount}, Final: $${finalAmount}`);
+            return finalAmount;
+        }
+
+        // Enable/disable inputs when checkbox changes
+        document.getElementById('applyLateFee')?.addEventListener('change', function () {
+            document.getElementById('lateFeePercent').disabled = !this.checked;
+            calculateFinalAmount();
+        });
+
+        document.getElementById('applyProcessingFee')?.addEventListener('change', function () {
+            document.getElementById('processingFee').disabled = !this.checked;
+            calculateFinalAmount();
+        });
+
+        // Listen to amount changes
+        let amountInput = document.querySelector('input[name="Amount"]');
+        if (amountInput) {
+            amountInput.addEventListener('input', function () {
+                if (this.value && !isNaN(this.value)) {
+                    this.value = parseFloat(this.value).toFixed(2);
+                }
+                calculateFinalAmount();
+            });
+        }
+
+        // Listen to fee value changes
+        document.getElementById('lateFeePercent')?.addEventListener('input', calculateFinalAmount);
+        document.getElementById('processingFee')?.addEventListener('input', calculateFinalAmount);
+
+        // Override form submission to use decorated amount
+        document.querySelector('form')?.addEventListener('submit', function (e) {
+            let finalAmount = calculateFinalAmount();
+            let amountInput = document.querySelector('input[name="Amount"]');
+
+            // Replace original amount with decorated amount
+            if (amountInput) {
+                amountInput.value = finalAmount.toFixed(2);
+                console.log(`Form submitting with decorated amount: $${finalAmount}`);
+            }
         });
     </script>
 }
